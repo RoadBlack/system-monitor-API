@@ -1,4 +1,5 @@
 from fastapi import FastAPI 
+from dataclasses import dataclass  
 import psutil
 import datetime
 import json    
@@ -6,27 +7,30 @@ app = FastAPI()
 
 #T
 
-
+@dataclass 
 class systemInfo():
-    def __init__(self,cpu,ram,disk,date):
-        self.cpu = cpu
-        self.ram = ram
-        self.disk = disk
-        self.date = date
-        
+        cpu: float
+        ram: float
+        disk: float
+        date: datetime.datetime
 
 
 @app.get("/")
 async def main():
     return("znajdujesz sie w glownym katalogu, wpisz /health aby zobaczyc czy dziala serwer")
 
-@app.get('/stats')
+@app.get('/stats', response_model=systemInfo)
 async def getItems():
     cpu_stats = psutil.cpu_percent()
     ram_stats = psutil.virtual_memory().percent
     disk_stats = psutil.disk_usage('/').percent
     server_date = datetime.datetime.now()
-    return(systemInfo(cpu_stats,ram_stats,disk_stats,server_date))
+    return{
+        "cpu": cpu_stats,
+        "ram": ram_stats,
+        "disk": disk_stats,
+        "date": server_date,     
+    }
 
 @app.get('/health')
 async def getItems():
