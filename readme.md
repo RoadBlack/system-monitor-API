@@ -23,7 +23,7 @@ This project is a simple REST API built with FastAPI that provides basic system 
 ### Installation
 1. Clone the repository:
    ```bash
-   git clone https://github.com/yourusername/system-monitor-api.git
+   git clone https://github.com/RoadBlack/system-monitor-api.git
    cd system-monitor-api
    ```
 2. (Optional) Create and activate a virtual environment:
@@ -48,11 +48,11 @@ uvicorn main:app --reload
    ```
 2. Run the container:
    ```bash
-   docker run -p 8000:8000 system-monitor-api
+   docker run -p 5000:5000 system-monitor-api
    ```
 
 ### Cloud Deployment
-This project is ready to be deployed to any cloud provider supporting Docker containers (e.g., AWS, Azure, GCP).
+This project is ready to be deployed to any cloud provider supporting Docker containers (e.g. AWS, Azure, GCP).
 
 ## DevSecOps Focus
 This project is part of a DevSecOps portfolio, demonstrating best practices in:
