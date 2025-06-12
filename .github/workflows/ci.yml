@@ -41,6 +41,10 @@ jobs:
               run: pip install -r requirements.txt
             - run: docker build -t api-build . 
             - run: docker run --name python-build -d -p 5000:5000 api-build
+            - run: |
+                for i in{1..5}; do
+                 curl http://0.0.0.0:5000/ && break || sleep 5;
+                done
             - run: curl http://0.0.0.0:5000/
             - run: curl http://0.0.0.0:5000/stats 
             - run: curl http://0.0.0.0:5000/health 
