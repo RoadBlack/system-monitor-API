@@ -3,8 +3,10 @@ run-name: ${{github.actor}} is running CI pipeline
 on: [push]
 jobs:
     endpoint-check:
+
         runs-on: ubuntu-latest
         steps:
+            - uses: actions/checkout@v4
             - run: echo "Starting check for endpoint security"
             - run: pip install -r requirements.txt
             - run: pytest -v 
