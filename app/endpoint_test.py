@@ -14,7 +14,7 @@ def test_read_health():
 def test_read_stats():
     response = client.get("/stats")
     assert response.status_code == 200
-    assert type(response.json()['cpu']) == float
+    assert type(response.json()['cpu']) == int
     assert type(response.json()['ram']) == float
     assert type(response.json()['disk']) == float
 
