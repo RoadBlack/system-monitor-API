@@ -2,14 +2,24 @@ name: Standard workflow
 run-name: ${{github.actor}} is running CI pipeline
 on: [push]
 jobs:
-    endpoint-check:
-
+    build:
         runs-on: ubuntu-latest
         steps:
             - uses: actions/checkout@v4
-            - run: echo "Starting check for endpoint security"
             - run: pip install -r requirements.txt
-            - run: pytest -v 
+    py-test:
+        needs: build 
+        runs-on: ubuntu-latest
+        steps:
+            - run: pytest -v
+    docker-build:
+        needs: build
+        runs-on: ubuntu-latest
+        steps:
+            - run: docker build -t api-build . 
+            - run: docker run api-build
+            - run: docker stop api-build
+            
 
     
 
