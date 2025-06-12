@@ -40,12 +40,12 @@ jobs:
             - name: run instalation of dependencies
               run: pip install -r requirements.txt
             - run: docker build -t api-build . 
-            - run: docker run -d -p 5000:5000 api-build
+            - run: docker run --name python-build -d -p 5000:5000 api-build
             - run: curl http://0.0.0.0:5000/
             - run: curl http://0.0.0.0:5000/stats 
             - run: curl http://0.0.0.0:5000/health 
-            - run: docker stop api-build
-            - run: docker -rm api-build
+            - run: docker stop python-build
+            - run: docker remove python-build
             
 
     
