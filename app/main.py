@@ -39,12 +39,12 @@ async def getItems():
     disk_stats = psutil.disk_usage('/').percent
     server_date = datetime.datetime.now()
     if(cpu_stats < 0):
-        return("Wystapil problem z cpu")
+        return{"msg":"Wystapil problem z cpu"}
     elif(ram_stats < 0):
-        return("wystapil problem z ramem")
+        return{"msg":"wystapil problem z ramem"}
     elif(disk_stats < 0):
-        return("wystapil problem z Dyskiem")
+        return{"msg":"wystapil problem z Dyskiem"}
     elif(server_date is None):
-        return("wystapil problem z Data")
+        return{"msg":"wystapil problem z Data"}
     else:
-        return("OK")
+        return{"msg": "OK"}
