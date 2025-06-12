@@ -1,0 +1,12 @@
+name: Standard workflow
+run-name: ${{github.actor}} is running CI pipeline
+on: [push]
+jobs:
+    endpoint-check:
+        runs-on: ubuntu-latest
+        steps:
+            - run: echo "Starting check for endpoint security"
+            - run: pytest -v 
+            
+    
+
