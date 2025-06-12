@@ -7,15 +7,38 @@ jobs:
         steps:
             - uses: actions/checkout@v4
             - run: pip install -r requirements.txt
+
+            - name: upload requirements
+              uses: actions/upload-artifact@v4 
+              with:
+               name: requirements
+               path: requirements.txt
     py-test:
         needs: build 
         runs-on: ubuntu-latest
         steps:
-            - run: pytest -v
+            - uses: actions/checkout@v4
+            - name: download requirements
+              uses: actions/download-artifact@v4
+              with: 
+                name: requirements
+            - name: run instalation of dependencies
+              run: pip install -r requirements.txt
+
+            - name: run pytest
+              run: pytest -v
     docker-build:
         needs: build
         runs-on: ubuntu-latest
         steps:
+            - uses: actions/checkout@v4
+            - name: download requirements
+              uses: actions/download-artifact@v4
+              with: 
+                name: requirements
+            
+            - name: run instalation of dependencies
+              run: pip install -r requirements.txt
             - run: docker build -t api-build . 
             - run: docker run api-build
             - run: docker stop api-build
