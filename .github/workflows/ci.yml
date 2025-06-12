@@ -6,7 +6,8 @@ jobs:
         runs-on: ubuntu-latest
         steps:
             - run: echo "Starting check for endpoint security"
+            - run: pip install requirements.txt
             - run: pytest -v 
-            
+
     
 
